@@ -3,8 +3,8 @@ locals {
 }
 
 resource "random_password" "api-key" {
-  length           = 16
-  special          = false
+  length  = 16
+  special = false
 }
 
 resource "kubernetes_namespace" "github-teams-filter" {
@@ -33,13 +33,14 @@ resource "helm_release" "github-teams-filter" {
   version    = var.chart_version
 
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    ecrUrl   = var.ecr_url
-    imageTag = var.image_tag
-    hostName = var.hostname
+    ecrUrl       = var.ecr_url
+    imageTag     = var.image_tag
+    hostName     = var.hostname
+    replicaCount = var.replica_count
   })]
 
   set_sensitive {
-    name = "apiKey"
+    name  = "apiKey"
     value = random_password.api-key.result
   }
 }
