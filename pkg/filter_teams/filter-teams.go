@@ -24,6 +24,6 @@ func GetClusterGithubTeams(clientset *kubernetes.Clientset) ([]string, error) {
 		}
 	}
 
-	dedupTeams := utils.RemoveDuplicates(allTeams)
+	dedupTeams := utils.DeduplicateTeams(allTeams)
 	return dedupTeams, nil
 }

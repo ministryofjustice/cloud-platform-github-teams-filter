@@ -1,17 +1,14 @@
 package utils
 
 import (
-	"fmt"
 	"strings"
 )
 
-// Strip github prefix
 func StripGithubPrefix(name string) string {
 	return strings.Replace(name, "github:", "", -1)
 }
 
-// Deduplicate teams
-func RemoveDuplicates(allTeams []string) []string {
+func DeduplicateTeams(allTeams []string) []string {
 	seen := map[string]bool{}
 	dedupTeams := []string{}
 
@@ -25,13 +22,9 @@ func RemoveDuplicates(allTeams []string) []string {
 	return dedupTeams
 }
 
-// Filter out teams that are not present in the cluster teams slice
 func FilterTeams(input string, cluster []string) string {
 
-	// Convert input teams string to slice
 	inputSlice := strings.Split(input, ":")
-	fmt.Println(inputSlice)
-
 	clusterMap := map[string]bool{}
 
 	for _, team := range cluster {
@@ -45,6 +38,5 @@ func FilterTeams(input string, cluster []string) string {
 		}
 	}
 
-	// Convert filtered slice back to string
 	return ":" + strings.Join(result, ":") + ":"
 }
