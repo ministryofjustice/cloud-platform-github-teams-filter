@@ -4,7 +4,7 @@ variable "chart_version" {
 }
 
 variable "ecr_url" {
-  type = string
+  type        = string
   description = "the url of the ecr repo"
 }
 
@@ -16,5 +16,11 @@ variable "image_tag" {
 variable "hostname" {
   description = "the hostname to use for the service"
   type        = string
-  default    = "github-teams-filter.apps.live.cloud-platform.service.justice.gov.uk"
+  default     = "github-teams-filter.apps.live.cloud-platform.service.justice.gov.uk"
+}
+
+variable "replica_count" {
+  description = "the number of replicas to deploy"
+  type        = number
+  default     = 1
 }
