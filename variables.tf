@@ -24,3 +24,15 @@ variable "replica_count" {
   type        = number
   default     = 1
 }
+
+variable "filter_api_key" {
+  description = "the api key to use for the filter"
+  type        = string
+  sensitive   = true
+}
+
+variable "logLevel" {
+  description = "gin log level to use for the api"
+  type        = string
+  default     = "release"
+}
