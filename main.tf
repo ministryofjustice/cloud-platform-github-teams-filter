@@ -2,11 +2,6 @@ locals {
   ns = "cloud-platform-github-teams-filter"
 }
 
-resource "random_password" "api-key" {
-  length  = 16
-  special = false
-}
-
 resource "kubernetes_namespace" "github-teams-filter" {
   metadata {
     name = local.ns
@@ -37,10 +32,11 @@ resource "helm_release" "github-teams-filter" {
     imageTag     = var.image_tag
     hostName     = var.hostname
     replicaCount = var.replica_count
+    logLevel     = var.logLevel
   })]
 
   set_sensitive {
     name  = "apiKey"
-    value = random_password.api-key.result
+    value = var.filter_api_key
   }
 }
