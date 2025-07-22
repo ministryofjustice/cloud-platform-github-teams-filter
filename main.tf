@@ -35,8 +35,10 @@ resource "helm_release" "github-teams-filter" {
     logLevel     = var.logLevel
   })]
 
-  set_sensitive {
-    name  = "apiKey"
-    value = var.filter_api_key
-  }
+  set_sensitive = [
+    {
+      name  = "apiKey"
+      value = var.filter_api_key
+    }
+  ]
 }
